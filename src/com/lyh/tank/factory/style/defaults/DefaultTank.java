@@ -45,7 +45,7 @@ public class DefaultTank extends BaseTank {
 		rect.width=this.WIDTH;
 		rect.height=this.HEIGHT;
 		if(Group.GOOD == group) {
-			fs = FourFireStrategy.INSTANCE;
+			fs = DefaultFireStrategy.INSTANCE;
 		}else {
 			fs = DefaultFireStrategy.INSTANCE;
 		}
@@ -116,6 +116,10 @@ public class DefaultTank extends BaseTank {
 
 	public void fire() {
 		fs.fire(this,ay);
+//		int bX = this.x + this.WIDTH/2 - DefaultBullet.WIDTH+14;
+//		int bY = this.y +this.HEIGHT/2 - DefaultBullet.HEIGHT+14;
+//		this.tf.btList.add(ay.creatBullet(bX,bY,this.dir,this.group, this.tf));
+		
 	}
 	
 	public Dir getDir() {

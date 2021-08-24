@@ -26,7 +26,7 @@ public class Bullet {
 //		rect.y = this.y;
 //		rect.width=this.WIDTH;
 //		rect.height=this.HEIGHT;
-//		tf.btList.add(this);
+//		//tf.btList.add(this);
 //	}
 //	
 //	public void paint(Graphics g) {
@@ -95,7 +95,7 @@ public class Bullet {
 //	public void setGroup(Group group) {
 //		this.group = group;
 //	}
-//	
-//	
+	
+	
 	
 }

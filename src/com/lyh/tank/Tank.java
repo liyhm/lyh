@@ -4,6 +4,8 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.Random;
 
+import com.lyh.tank.factory.style.BaseBullet;
+
 public class Tank {
 //	int x, y;
 //	Dir dir = Dir.DOWN;
@@ -16,7 +18,7 @@ public class Tank {
 //	public Random random = new Random();
 //	Group group = Group.BAD;
 //	public Rectangle rect = new Rectangle();
-//	FireStrategy fs ;
+////	FireStrategy fs ;
 //	
 //	public Tank(int x, int y, Dir dir,Group group,TankFrame tf) {
 //		this.x = x;
@@ -28,11 +30,11 @@ public class Tank {
 //		rect.y = this.y;
 //		rect.width=this.WIDTH;
 //		rect.height=this.HEIGHT;
-//		if(Group.GOOD == group) {
-//			fs = FourFireStrategy.INSTANCE;
-//		}else {
-//			fs = DefaultFireStrategy.INSTANCE;
-//		}
+////		if(Group.GOOD == group) {
+////			fs = FourFireStrategy.INSTANCE;
+////		}else {
+////			fs = DefaultFireStrategy.INSTANCE;
+////		}
 //	}
 //
 //	public void paint(Graphics g) {
@@ -99,7 +101,10 @@ public class Tank {
 //	}
 //
 //	public void fire() {
-//		fs.fire(this);
+//		//fs.fire(this);
+//		int bX = this.x + this.WIDTH/2 - Bullet.WIDTH+14;
+//		int bY = this.y +this.HEIGHT/2 - Bullet.HEIGHT+14;
+//		tf.btList.add(new Bullet(bX,bY,this.dir,this.group, this.tf));
 //	}
 //	
 //	public Dir getDir() {

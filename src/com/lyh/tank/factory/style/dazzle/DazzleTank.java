@@ -120,6 +120,12 @@ public class DazzleTank extends BaseTank {
 		@Override
 		public void fire() {
 			fs.fire(this,ay);
+//			int bX = this.x + this.WIDTH/2 - DazzleBullet.WIDTH+14;
+//			int bY = this.y +this.HEIGHT/2 - DazzleBullet.HEIGHT+14;
+//			Dir dirs[] = Dir.values();
+//			for(Dir dir:dirs) {
+//				this.tf.btList.add(ay.creatBullet(bX,bY,dir,this.group, this.tf));
+//			}
 		}
 		
 		public Dir getDir() {

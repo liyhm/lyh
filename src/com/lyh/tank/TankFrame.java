@@ -20,15 +20,16 @@ import com.lyh.tank.factory.style.BaseTank;
 
 public class TankFrame extends Frame {
 	//Tank tk = new Tank(200,400,Dir.DOWN,Group.GOOD,this);
-	//Bullet bt = new Bullet(300, 300, Dir.DOWN, this);
 	public static final int GAME_WIDTH=Integer.parseInt((String)PropertyMgr.get("gameWidth"));
 	public static final int GAME_HEIGHT=Integer.parseInt((String)PropertyMgr.get("gameHeight"));
-	public List<BaseBullet> btList = new ArrayList<BaseBullet>();
-	public List<BaseTank> tanks = new ArrayList<BaseTank>();
-	public List<BaseExplode> explodes =  new ArrayList<BaseExplode>();
-	//Explodes explodes = new Explodes(100, 100, this);
-	public static AbstractFactory ay = DefaultFactory.getInstance();
-	BaseTank tk = ay.creatTank(200,400,Dir.DOWN,Group.GOOD,this,ay);
+	public List<BaseBullet> btList = new ArrayList<BaseBullet>(); 
+	public List<BaseTank> tanks = new ArrayList<BaseTank>(); 
+	public List<BaseExplode> explodes =  new ArrayList<BaseExplode>(); 
+//	public List<Bullet> btList = new ArrayList<Bullet>(); 
+//	public List<Tank> tanks = new ArrayList<Tank>(); 
+//	public List<Explodes> explodes =  new ArrayList<Explodes>(); 
+	public static AbstractFactory ay = DefaultFactory.getInstance(); 
+	BaseTank tk = ay.creatTank(200,400,Dir.DOWN,Group.GOOD,this,ay); 
 	public TankFrame _this=this;
 	
 	public TankFrame() {
@@ -124,7 +125,7 @@ public class TankFrame extends Frame {
 				DazzleFactory dey = DazzleFactory.getInstance();
 				tk = dey.creatTank(tk.x, tk.y, tk.dir, Group.GOOD, _this, dey);
 				break;
-			default:
+	 		default:
 				break;
 			}
 			setMainTankDir();
