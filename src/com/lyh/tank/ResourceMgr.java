@@ -4,9 +4,6 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
-import com.lyh.tank.factory.AbstractFactory;
-import com.lyh.tank.factory.DefaultFactory;
-
 
 public class ResourceMgr {
 	

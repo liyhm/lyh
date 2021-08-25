@@ -8,30 +8,13 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.lyh.tank.factory.AbstractFactory;
-import com.lyh.tank.factory.DazzleFactory;
-import com.lyh.tank.factory.DefaultFactory;
-import com.lyh.tank.factory.style.BaseBullet;
-import com.lyh.tank.factory.style.BaseExplode;
-import com.lyh.tank.factory.style.BaseTank;
 
 public class TankFrame extends Frame {
-	Tank tk = new Tank(200,400,Dir.DOWN,Group.GOOD,this);
+	
 	public static final int GAME_WIDTH=Integer.parseInt((String)PropertyMgr.get("gameWidth"));
 	public static final int GAME_HEIGHT=Integer.parseInt((String)PropertyMgr.get("gameHeight"));
-	//public List<BaseBullet> btList = new ArrayList<BaseBullet>(); 
-	//public List<BaseTank> tanks = new ArrayList<BaseTank>(); 
-	//public List<BaseExplode> explodes =  new ArrayList<BaseExplode>(); 
-	//public static AbstractFactory ay = DefaultFactory.getInstance(); 
-	//BaseTank tk = ay.creatTank(200,400,Dir.DOWN,Group.GOOD,this,ay); 
-	public List<Bullet> btList = new ArrayList<Bullet>(); 
-	public List<Tank> tanks = new ArrayList<Tank>(); 
-	public List<Explodes> explodes =  new ArrayList<Explodes>(); 
 
-	public TankFrame _this=this;
+	GameModel model = new GameModel();
 	
 	public TankFrame() {
 		setSize(GAME_WIDTH, GAME_HEIGHT);
@@ -50,34 +33,10 @@ public class TankFrame extends Frame {
 
 	@Override
 	public void paint(Graphics g) {
-		Color c = g.getColor();
-		g.setColor(Color.white);
-		g.drawString("方向键上下左右调整方向，Ctrk键开火", 10,45);
-		g.drawString("子弹的数量："+btList.size(), 10,60);
-		g.drawString("敌人的数量："+tanks.size(), 10,80);
-		g.drawString("爆炸的数量："+explodes.size(), 10,100);
-		g.setColor(c);
-		tk.paint(g);
-		for(int i = 0; i < btList.size(); i++) {
-			btList.get(i).paint(g);
-		}
-		
-		for(int i = 0; i < tanks.size(); i++) {
-			tanks.get(i).paint(g);
-		}
-		
-		for(int i = 0; i<btList.size();i++) {
-			for(int j = 0; j<tanks.size();j++) {
-				//btList.get(i).collidWith(tanks.get(j),ay);
-				btList.get(i).collidWith(tanks.get(j));
-			}
-		}
-		
-		for(int i = 0; i < explodes.size(); i++) {
-			explodes.get(i).paint(g);
-		}
-		
+		model.paint(g);
 	}
+	
+	
 	
 	Image offScreenImage = null;
 	@Override
@@ -92,6 +51,7 @@ public class TankFrame extends Frame {
 		gOffScreen.setColor(c);
 		paint(gOffScreen);
 		g.drawImage(offScreenImage,0,0,null);
+		
 	}
 
 	class MyKeyListener extends KeyAdapter {
@@ -117,7 +77,7 @@ public class TankFrame extends Frame {
 				bd = true;
 				break;
 			case KeyEvent.VK_CONTROL:
-				tk.fire();
+				model.getMyTank().fire();
 				break;
 //			case KeyEvent.VK_0:
 //				AbstractFactory day = DefaultFactory.getInstance();
@@ -156,15 +116,16 @@ public class TankFrame extends Frame {
 		}
 		
 		private void setMainTankDir() {
+			Tank tank = model.getMyTank();
 			if(!bl && !bu && !br && !bd) {
-				tk.setMoving(false);
+				tank.setMoving(false);
 			}else {
-				tk.setMoving(true);
+				tank.setMoving(true);
 			}
-			if(bl) tk.setDir(Dir.LEFT);
-			if(bu) tk.setDir(Dir.UP);
-			if(br) tk.setDir(Dir.RIGTH);
-			if(bd) tk.setDir(Dir.DOWN);
+			if(bl) tank.setDir(Dir.LEFT);
+			if(bu) tank.setDir(Dir.UP);
+			if(br) tank.setDir(Dir.RIGTH);
+			if(bd) tank.setDir(Dir.DOWN);
 			
 		}
 	}

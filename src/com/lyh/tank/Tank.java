@@ -11,7 +11,7 @@ public class Tank {
 	Dir dir = Dir.DOWN;
 	private static final int SPEED = Integer.parseInt((String)PropertyMgr.get("tankSpeed"));
 	private boolean moving = true;
-	TankFrame tf = null;
+	GameModel tf = null;
 	public static int WIDTH = ResourceMgr.goodTankU.getWidth();
 	public static int HEIGHT = ResourceMgr.goodTankU.getHeight();
 	public boolean living = true; 
@@ -20,12 +20,12 @@ public class Tank {
 	public Rectangle rect = new Rectangle();
 //	FireStrategy fs ;
 	
-	public Tank(int x, int y, Dir dir,Group group,TankFrame tf) {
+	public Tank(int x, int y, Dir dir,Group group,GameModel gameModel) {
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
 		this.group = group;
-		this.tf = tf;
+		this.tf = gameModel;
 		rect.x = this.x;
 		rect.y = this.y;
 		rect.width=this.WIDTH;
