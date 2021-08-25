@@ -19,17 +19,18 @@ import com.lyh.tank.factory.style.BaseExplode;
 import com.lyh.tank.factory.style.BaseTank;
 
 public class TankFrame extends Frame {
-	//Tank tk = new Tank(200,400,Dir.DOWN,Group.GOOD,this);
+	Tank tk = new Tank(200,400,Dir.DOWN,Group.GOOD,this);
 	public static final int GAME_WIDTH=Integer.parseInt((String)PropertyMgr.get("gameWidth"));
 	public static final int GAME_HEIGHT=Integer.parseInt((String)PropertyMgr.get("gameHeight"));
-	public List<BaseBullet> btList = new ArrayList<BaseBullet>(); 
-	public List<BaseTank> tanks = new ArrayList<BaseTank>(); 
-	public List<BaseExplode> explodes =  new ArrayList<BaseExplode>(); 
-//	public List<Bullet> btList = new ArrayList<Bullet>(); 
-//	public List<Tank> tanks = new ArrayList<Tank>(); 
-//	public List<Explodes> explodes =  new ArrayList<Explodes>(); 
-	public static AbstractFactory ay = DefaultFactory.getInstance(); 
-	BaseTank tk = ay.creatTank(200,400,Dir.DOWN,Group.GOOD,this,ay); 
+	//public List<BaseBullet> btList = new ArrayList<BaseBullet>(); 
+	//public List<BaseTank> tanks = new ArrayList<BaseTank>(); 
+	//public List<BaseExplode> explodes =  new ArrayList<BaseExplode>(); 
+	//public static AbstractFactory ay = DefaultFactory.getInstance(); 
+	//BaseTank tk = ay.creatTank(200,400,Dir.DOWN,Group.GOOD,this,ay); 
+	public List<Bullet> btList = new ArrayList<Bullet>(); 
+	public List<Tank> tanks = new ArrayList<Tank>(); 
+	public List<Explodes> explodes =  new ArrayList<Explodes>(); 
+
 	public TankFrame _this=this;
 	
 	public TankFrame() {
@@ -67,7 +68,8 @@ public class TankFrame extends Frame {
 		
 		for(int i = 0; i<btList.size();i++) {
 			for(int j = 0; j<tanks.size();j++) {
-				btList.get(i).collidWith(tanks.get(j),ay);
+				//btList.get(i).collidWith(tanks.get(j),ay);
+				btList.get(i).collidWith(tanks.get(j));
 			}
 		}
 		
@@ -111,20 +113,20 @@ public class TankFrame extends Frame {
 			case KeyEvent.VK_RIGHT:
 				br = true;
 				break;
-			case KeyEvent.VK_DOWN:
+			case KeyEvent.VK_DOWN: 
 				bd = true;
 				break;
 			case KeyEvent.VK_CONTROL:
 				tk.fire();
 				break;
-			case KeyEvent.VK_0:
-				AbstractFactory day = DefaultFactory.getInstance();
-				tk = day.creatTank(tk.x, tk.y, tk.dir, Group.GOOD, _this, day);
-				break;
-			case KeyEvent.VK_1:
-				DazzleFactory dey = DazzleFactory.getInstance();
-				tk = dey.creatTank(tk.x, tk.y, tk.dir, Group.GOOD, _this, dey);
-				break;
+//			case KeyEvent.VK_0:
+//				AbstractFactory day = DefaultFactory.getInstance();
+//				tk = day.creatTank(tk.x, tk.y, tk.dir, Group.GOOD, _this, day);
+//				break;
+//			case KeyEvent.VK_1:
+//				DazzleFactory dey = DazzleFactory.getInstance();
+//				tk = dey.creatTank(tk.x, tk.y, tk.dir, Group.GOOD, _this, dey);
+//				break;
 	 		default:
 				break;
 			}

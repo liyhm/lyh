@@ -10,18 +10,18 @@ public class DefaultFireStrategy implements FireStrategy {
 	
 	private DefaultFireStrategy() {}
 	
-	@Override
-	public void fire(BaseTank t,AbstractFactory ay) {
-		int bX = t.x + t.WIDTH/2 - BaseBullet.WIDTH+14;
-		int bY = t.y +t.HEIGHT/2 - BaseBullet.HEIGHT+14;
-		ay.creatBullet(bX,bY,t.dir,t.group, t.tf);
-	}
-
 //	@Override
-//	public void fire(Tank t) {
+//	public void fire(BaseTank t,AbstractFactory ay) {
 //		int bX = t.x + t.WIDTH/2 - BaseBullet.WIDTH+14;
 //		int bY = t.y +t.HEIGHT/2 - BaseBullet.HEIGHT+14;
-//		new Bullet(bX,bY,t.dir,t.group, t.tf);
+//		ay.creatBullet(bX,bY,t.dir,t.group, t.tf);
 //	}
+
+	@Override
+	public void fire(Tank t) {
+		int bX = t.x + t.WIDTH/2 - BaseBullet.WIDTH+14;
+		int bY = t.y +t.HEIGHT/2 - BaseBullet.HEIGHT+14;
+		new Bullet(bX,bY,t.dir,t.group, t.tf);
+	}
 	
 }

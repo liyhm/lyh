@@ -41,7 +41,7 @@ public class DazzleBullet extends BaseBullet {
 		rect.y = this.y;
 		rect.width=this.WIDTH;
 		rect.height=this.HEIGHT;
-		tf.btList.add(this);
+		//tf.btList.add(this);-------------------------------------------------------------------
 	}
 	
 	public void paint(Graphics g) {
@@ -94,7 +94,7 @@ public class DazzleBullet extends BaseBullet {
 		if(rect.intersects(tank.rect)) {
 			int eX=tank.getX()+tank.WIDTH/2 - DazzleExplode.WIDTH/2;
 			int eY=tank.getY()+tank.HEIGHT/2 -DazzleExplode.HEIGHT/2;
-			tf.explodes.add(ay.creatExplode(eX, eY, tf));
+			//tf.explodes.add(ay.creatExplode(eX, eY, tf));------------------------------------------------------------------
 			tank.die();
 			this.die();
 		}
