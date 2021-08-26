@@ -1,4 +1,4 @@
-package com.lyh.tank;
+package com.lyh.tank.resource;
 
 import java.awt.image.BufferedImage;
 
@@ -25,6 +25,8 @@ public class ResourceMgr {
 	public static BufferedImage goodTankDazzleL, goodTankDazzleU, goodTankDazzleR, goodTankDazzleD;
 	public static BufferedImage bulletDazzleL, bulletDazzleU, bulletDazzleR, bulletDazzleD;
 	
+	public static BufferedImage wallU;
+	
 	static {
 		try {
 			goodTankU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/GoodTank1.png"));
@@ -45,6 +47,8 @@ public class ResourceMgr {
 			for(int i=0;i<16;i++) {
 				explodes[i]=ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/e"+(i+1)+".gif"));
 			}
+			
+			wallU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/wall.png"));
 			
 			//--------StyleTwo--------------------------------------------------------------------------------------
 			goodTankDazzleU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankDazzle.png"));

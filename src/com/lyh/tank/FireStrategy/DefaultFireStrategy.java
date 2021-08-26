@@ -1,8 +1,10 @@
-package com.lyh.tank;
+package com.lyh.tank.FireStrategy;
 
 import com.lyh.tank.factory.AbstractFactory;
 import com.lyh.tank.factory.style.BaseBullet;
 import com.lyh.tank.factory.style.BaseTank;
+import com.lyh.tank.gameobject.Bullet;
+import com.lyh.tank.gameobject.Tank;
 
 public class DefaultFireStrategy implements FireStrategy {
 
@@ -21,7 +23,7 @@ public class DefaultFireStrategy implements FireStrategy {
 	public void fire(Tank t) {
 		int bX = t.x + t.WIDTH/2 - BaseBullet.WIDTH+14;
 		int bY = t.y +t.HEIGHT/2 - BaseBullet.HEIGHT+14;
-		new Bullet(bX,bY,t.dir,t.group, t.tf);
+		new Bullet(bX,bY,t.dir,t.group, t.gm);
 	}
 	
 }

@@ -4,10 +4,10 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
-import com.lyh.tank.Dir;
-import com.lyh.tank.Group;
-import com.lyh.tank.ResourceMgr;
 import com.lyh.tank.TankFrame;
+import com.lyh.tank.resource.Dir;
+import com.lyh.tank.resource.Group;
+import com.lyh.tank.resource.ResourceMgr;
 
 public abstract class BaseTank {
 	public Rectangle rect ;

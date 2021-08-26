@@ -1,5 +1,5 @@
 
-package com.lyh.tank;
+package com.lyh.tank.resource;
 
 import java.io.IOException;
 

@@ -9,6 +9,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import com.lyh.tank.gameobject.Tank;
+import com.lyh.tank.resource.Dir;
+import com.lyh.tank.resource.PropertyMgr;
+
 public class TankFrame extends Frame {
 	
 	public static final int GAME_WIDTH=Integer.parseInt((String)PropertyMgr.get("gameWidth"));

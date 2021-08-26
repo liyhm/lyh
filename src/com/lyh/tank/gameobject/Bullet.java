@@ -1,27 +1,34 @@
-package com.lyh.tank;
+package com.lyh.tank.gameobject;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
+import com.lyh.tank.GameModel;
+import com.lyh.tank.TankFrame;
+import com.lyh.tank.resource.Dir;
+import com.lyh.tank.resource.Group;
+import com.lyh.tank.resource.PropertyMgr;
+import com.lyh.tank.resource.ResourceMgr;
 
-public class Bullet {
+
+public class Bullet extends GameObject {
 	private static final int SPEED = Integer.parseInt((String)PropertyMgr.get("bulletSpeed"));
 	private int x,y;
 	private Dir dir;
 	public static int WIDTH = ResourceMgr.bulletD.getWidth();
 	public static int HEIGHT = ResourceMgr.bulletD.getHeight();
 	private boolean living = true;
-	private GameModel model =null;
-	private Group group = Group.BAD;
-	Rectangle rect = new Rectangle();
+	public GameModel gm =null;
+	public Group group = Group.BAD;
+	public Rectangle rect = new Rectangle();
 	
-	public Bullet(int x, int y, Dir dir,Group group,GameModel model) {
+	public Bullet(int x, int y, Dir dir,Group group,GameModel gm) {
 		super();
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
 		this.group=group;
-		this.model = model;
+		this.gm = gm;
 		rect.x = this.x;
 		rect.y = this.y;
 		rect.width=this.WIDTH;
@@ -31,7 +38,7 @@ public class Bullet {
 	
 	public void paint(Graphics g) {
 		if(!living) {
-			model.btList.remove(this);
+			gm.remove(this);
 		}
 		switch (dir) {
 		case LEFT:
@@ -73,18 +80,7 @@ public class Bullet {
 		
 	}
 
-	public void collidWith(Tank tank) {
-		if(this.group == tank.getGroup()) return ;
-		if(rect.intersects(tank.rect)) {
-			int eX=tank.getX()+Tank.WIDTH/2 - Explodes.WIDTH/2;
-			int eY=tank.getY()+tank.HEIGHT/2 -Explodes.HEIGHT/2;
-			model.explodes.add(new Explodes(eX, eY, model));
-			tank.die();
-			this.die();
-		}
-	}
-
-	private void die() {
+	public void die() {
 		living = false;
 	}
 

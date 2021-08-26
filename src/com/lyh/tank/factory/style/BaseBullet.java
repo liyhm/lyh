@@ -3,8 +3,8 @@ package com.lyh.tank.factory.style;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import com.lyh.tank.ResourceMgr;
 import com.lyh.tank.factory.AbstractFactory;
+import com.lyh.tank.resource.ResourceMgr;
 
 public abstract class BaseBullet {
 	public static int WIDTH = ResourceMgr.bulletD.getWidth();

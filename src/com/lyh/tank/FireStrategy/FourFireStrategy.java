@@ -1,4 +1,8 @@
-package com.lyh.tank;
+package com.lyh.tank.FireStrategy;
+
+import com.lyh.tank.gameobject.Bullet;
+import com.lyh.tank.gameobject.Tank;
+import com.lyh.tank.resource.Dir;
 
 public class FourFireStrategy implements FireStrategy {
 
@@ -22,7 +26,7 @@ public class FourFireStrategy implements FireStrategy {
 		int bY = t.y +t.HEIGHT/2 - Bullet.HEIGHT+14;
 		Dir dirs[] = Dir.values();
 		for(Dir dir:dirs) {
-			new Bullet(bX,bY,dir,t.group, t.tf);
+			new Bullet(bX,bY,dir,t.group, t.gm);
 		}
 	}
 	

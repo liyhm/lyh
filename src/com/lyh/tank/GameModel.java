@@ -2,61 +2,68 @@ package com.lyh.tank;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
+import com.lyh.tank.collider.ColliderChain;
+import com.lyh.tank.gameobject.GameObject;
+import com.lyh.tank.gameobject.Tank;
+import com.lyh.tank.gameobject.Wall;
+import com.lyh.tank.resource.Dir;
+import com.lyh.tank.resource.Group;
+import com.lyh.tank.resource.PropertyMgr;
 
 public class GameModel {
 	
-	//public List<BaseBullet> btList = new ArrayList<BaseBullet>(); 
-	//public List<BaseTank> tanks = new ArrayList<BaseTank>(); 
-	//public List<BaseExplode> explodes =  new ArrayList<BaseExplode>(); 
-	//public static AbstractFactory ay = DefaultFactory.getInstance(); 
-	//BaseTank tk = ay.creatTank(200,400,Dir.DOWN,Group.GOOD,this,ay); 
-	//public TankFrame _this=this;
 	Tank tk = new Tank(200,400,Dir.DOWN,Group.GOOD,this);
-	public List<Bullet> btList = new ArrayList<Bullet>(); 
-	public List<Tank> tanks = new ArrayList<Tank>(); 
-	public List<Explodes> explodes =  new ArrayList<Explodes>();
-	
+	private List<GameObject> list = new ArrayList<GameObject>();
+	ColliderChain ccn = new ColliderChain();
+	public Random random = new Random();
 	
 	public GameModel() {
+		int wallCount = Integer.parseInt((String)PropertyMgr.get("wallCount"));
 		int initTankCount = Integer.parseInt((String)PropertyMgr.get("initTankCount"));
-//		AbstractFactory ay = DefaultFactory.getInstance();  
-//		for(int i=0; i<initTankCount; i++) { 
-//			tf.tanks.add(ay.creatTank(50 + i*80, 200, Dir.DOWN, Group.BAD, tf,ay)); 
-//		}
-		for(int i=0; i<initTankCount; i++) {
-			tanks.add(new Tank(50 + i*80, 200, Dir.DOWN, Group.BAD, this));
+		
+		//墙
+		List<Integer> wallX = new ArrayList<>();
+		List<Integer> wallY = new ArrayList<>();
+		for(int i=0; i<wallCount; i++) {
+			boolean flag = true;
+			while(flag) {
+				int x = random.nextInt(1080);
+				int y = random.nextInt(700);
+				if(!wallX.contains(x) && !wallY.contains(y) && x > 50 && y > 200) {
+					wallX.add(x);
+					wallY.add(y);
+					add(new Wall(x-50,y-50));
+					flag = false;
+				}
+			}
 		}
+		
+		//敌方坦克
+		for(int i=0; i<initTankCount; i++) {
+			add(new Tank(50 + i*80, 200, Dir.DOWN, Group.BAD, this));
+		}
+		
 	}
 	
 	public void paint(Graphics g) {
 		Color c = g.getColor();
 		g.setColor(Color.white);
 		g.drawString("方向键上下左右调整方向，Ctrk键开火", 10,45);
-		g.drawString("子弹的数量："+btList.size(), 10,60);
-		g.drawString("敌人的数量："+tanks.size(), 10,80);
-		g.drawString("爆炸的数量："+explodes.size(), 10,100);
 		g.setColor(c);
 		tk.paint(g);
-		for(int i = 0; i < btList.size(); i++) {
-			btList.get(i).paint(g);
+		for(int i = 0; i < list.size(); i++) {
+			list.get(i).paint(g);
 		}
-		
-		for(int i = 0; i < tanks.size(); i++) {
-			tanks.get(i).paint(g);
-		}
-		
-		for(int i = 0; i<btList.size();i++) {
-			for(int j = 0; j<tanks.size();j++) {
-				//btList.get(i).collidWith(tanks.get(j),ay);
-				btList.get(i).collidWith(tanks.get(j));
+		for(int i = 0; i<list.size();i++) {
+			for(int j = i+1; j<list.size();j++) {
+				GameObject o1 = list.get(i);
+				GameObject o2 = list.get(j);
+				ccn.collide(o1, o2);
 			}
-		}
-		
-		for(int i = 0; i < explodes.size(); i++) {
-			explodes.get(i).paint(g);
 		}
 		
 	}
@@ -65,7 +72,12 @@ public class GameModel {
 		return tk;
 	} 
 
+	public void add(GameObject gt) {
+		list.add(gt);
+	}
 	
-	
+	public void remove(GameObject gt) {
+		list.remove(gt);
+	}
 	
 }

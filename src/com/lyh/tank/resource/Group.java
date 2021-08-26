@@ -1,4 +1,4 @@
-package com.lyh.tank;
+package com.lyh.tank.resource;
 
 public enum Group {
 	GOOD,BAD

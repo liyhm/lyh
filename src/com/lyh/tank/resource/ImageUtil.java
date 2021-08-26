@@ -1,4 +1,4 @@
-package com.lyh.tank;
+package com.lyh.tank.resource;
 
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
