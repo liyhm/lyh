@@ -13,32 +13,30 @@ import com.lyh.tank.resource.ResourceMgr;
 
 public class Bullet extends GameObject {
 	private static final int SPEED = Integer.parseInt((String)PropertyMgr.get("bulletSpeed"));
-	private int x,y;
 	private Dir dir;
 	public static int WIDTH = ResourceMgr.bulletD.getWidth();
 	public static int HEIGHT = ResourceMgr.bulletD.getHeight();
 	private boolean living = true;
-	public GameModel gm =null;
 	public Group group = Group.BAD;
 	public Rectangle rect = new Rectangle();
 	
-	public Bullet(int x, int y, Dir dir,Group group,GameModel gm) {
+	public Bullet(int x, int y, Dir dir,Group group) {
 		super();
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
 		this.group=group;
-		this.gm = gm;
 		rect.x = this.x;
 		rect.y = this.y;
 		rect.width=this.WIDTH;
 		rect.height=this.HEIGHT;
+		GameModel.getInstance().add(this);
 		//tf.btList.add(this);
 	}
 	
 	public void paint(Graphics g) {
 		if(!living) {
-			gm.remove(this);
+			GameModel.getInstance().remove(this);
 		}
 		switch (dir) {
 		case LEFT:
@@ -90,6 +88,16 @@ public class Bullet extends GameObject {
 
 	public void setGroup(Group group) {
 		this.group = group;
+	}
+
+	@Override
+	public int getWidth() {
+		return WIDTH;
+	}
+
+	@Override
+	public int getHeigt() {
+		return HEIGHT;
 	}
 	
 	

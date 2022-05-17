@@ -9,8 +9,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import com.lyh.tank.factory.AbstractFactory;
 import com.lyh.tank.gameobject.Tank;
 import com.lyh.tank.resource.Dir;
+import com.lyh.tank.resource.Group;
 import com.lyh.tank.resource.PropertyMgr;
 
 public class TankFrame extends Frame {
@@ -18,7 +20,7 @@ public class TankFrame extends Frame {
 	public static final int GAME_WIDTH=Integer.parseInt((String)PropertyMgr.get("gameWidth"));
 	public static final int GAME_HEIGHT=Integer.parseInt((String)PropertyMgr.get("gameHeight"));
 
-	GameModel model = new GameModel();
+	GameModel model =  GameModel.getInstance();
 	
 	public TankFrame() {
 		setSize(GAME_WIDTH, GAME_HEIGHT);
@@ -83,14 +85,14 @@ public class TankFrame extends Frame {
 			case KeyEvent.VK_CONTROL:
 				model.getMyTank().fire();
 				break;
-//			case KeyEvent.VK_0:
-//				AbstractFactory day = DefaultFactory.getInstance();
-//				tk = day.creatTank(tk.x, tk.y, tk.dir, Group.GOOD, _this, day);
-//				break;
-//			case KeyEvent.VK_1:
-//				DazzleFactory dey = DazzleFactory.getInstance();
-//				tk = dey.creatTank(tk.x, tk.y, tk.dir, Group.GOOD, _this, dey);
-//				break;
+		/*	case KeyEvent.VK_0:
+				AbstractFactory day = DefaultFactory.getInstance();
+				model.ttk = day.creatTank(tk.x, tk.y, tk.dir, Group.GOOD, _this, day);
+				break;
+			case KeyEvent.VK_1:
+				DazzleFactory dey = DazzleFactory.getInstance();
+				tk = dey.creatTank(tk.x, tk.y, tk.dir, Group.GOOD, _this, dey);
+				break;*/
 	 		default:
 				break;
 			}

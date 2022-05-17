@@ -3,6 +3,7 @@ package com.lyh.tank.gameobject;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
+import com.lyh.tank.GameModel;
 import com.lyh.tank.resource.ResourceMgr;
 
 public class Wall extends GameObject  {
@@ -19,10 +20,19 @@ public class Wall extends GameObject  {
 		rect.y = this.y;
 		rect.width=this.WIDTH;
 		rect.height=this.HEIGHT;
+		GameModel.getInstance().add(this);
 	}
 	@Override
 	public void paint(Graphics g) {
 		g.drawImage(ResourceMgr.wallU, x, y, null);
+	}
+	@Override
+	public int getWidth() {
+		return WIDTH;
+	}
+	@Override
+	public int getHeigt() {
+		return HEIGHT;
 	}
 
 }

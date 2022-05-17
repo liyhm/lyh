@@ -6,21 +6,19 @@ import java.util.Random;
 
 import com.lyh.tank.GameModel;
 import com.lyh.tank.TankFrame;
-import com.lyh.tank.factory.style.BaseBullet;
+import com.lyh.tank.decorator.RectDecorator;
+import com.lyh.tank.decorator.RectDecorator2;
 import com.lyh.tank.resource.Dir;
 import com.lyh.tank.resource.Group;
 import com.lyh.tank.resource.PropertyMgr;
 import com.lyh.tank.resource.ResourceMgr;
 
 public class Tank extends GameObject {
-	public int x;
-	public int y;
 	public int oldX;
 	public int oldY;
 	public Dir dir = Dir.DOWN;
 	private static final int SPEED = Integer.parseInt((String)PropertyMgr.get("tankSpeed"));
 	boolean moving = true;
-	public GameModel gm = null;
 	public static int WIDTH = ResourceMgr.goodTankU.getWidth();
 	public static int HEIGHT = ResourceMgr.goodTankU.getHeight();
 	public boolean living = true; 
@@ -29,16 +27,16 @@ public class Tank extends GameObject {
 	public Rectangle rect = new Rectangle();
 //	FireStrategy fs ;
 	
-	public Tank(int x, int y, Dir dir,Group group,GameModel gm) {
+	public Tank(int x, int y, Dir dir,Group group) {
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
 		this.group = group;
-		this.gm = gm;
 		rect.x = this.x;
 		rect.y = this.y;
 		rect.width=this.WIDTH;
 		rect.height=this.HEIGHT;
+		GameModel.getInstance().add(this);
 //		if(Group.GOOD == group) {
 //			fs = FourFireStrategy.INSTANCE;
 //		}else {
@@ -47,7 +45,7 @@ public class Tank extends GameObject {
 	}
 
 	public void paint(Graphics g) {
-		if(!living) gm.remove(this);
+		if(!living) GameModel.getInstance().remove(this);
 		switch (dir) {
 		case LEFT:
 			g.drawImage(this.group==Group.GOOD?ResourceMgr.goodTankL:ResourceMgr.badTankL,x,y,null);
@@ -114,7 +112,13 @@ public class Tank extends GameObject {
 		//fs.fire(this);
 		int bX = this.x + this.WIDTH/2 - Bullet.WIDTH+14;
 		int bY = this.y +this.HEIGHT/2 - Bullet.HEIGHT+14;
-		gm.add(new Bullet(bX,bY,this.dir,this.group, this.gm));
+		//GameModel.getInstance().add(new RectDecorator(new RectDecorator2(new Bullet(bX,bY,this.dir,this.group)))); 装饰模式
+		new Bullet(bX,bY,this.dir,this.group);
+	}
+	
+	public void back() {
+		x=oldX;
+		y=oldY;
 	}
 	
 	public Dir getDir() {
@@ -183,6 +187,16 @@ public class Tank extends GameObject {
 
 	public void setRect(Rectangle rect) {
 		this.rect = rect;
+	}
+
+	@Override
+	public int getWidth() {
+		return WIDTH;
+	}
+
+	@Override
+	public int getHeigt() {
+		return HEIGHT;
 	}
 
 }
